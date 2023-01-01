@@ -27,9 +27,9 @@ export class AuthController {
     if (!user || user.password !== body.password) {
       throw new UnauthorizedException();
     }
-    const accessToken = await this.authServices.issueAccessToken(user.id);
-    const refreshToken = await this.authServices.issueRefreshToken(user.id);
-    return { user, accessToken, refreshToken };
+
+    const tokens = await this.authServices.issueTokensPair(user);
+    return { user, ...tokens };
   }
 
   @Post("/registration")
@@ -37,19 +37,15 @@ export class AuthController {
   @UsePipes(ValidateDtoPipe, HashPasswordPipe)
   async createUser(@Body() body: CreateUserDto) {
     const user = await this.authServices.createUser(body);
-    const accessToken = await this.authServices.issueAccessToken(user.id);
-    const refreshToken = await this.authServices.issueRefreshToken(user.id);
-    return { user, accessToken, refreshToken };
+    const tokens = await this.authServices.issueTokensPair(user);
+    return { user, ...tokens };
   }
 
   @Post("/refresh")
   @UseGuards(RefreshTokenGuard)
   async refreshToken(@Request() req) {
-    const { updatedTokenId, id } = req.user;
-
-    await this.authServices.deleteRefreshToken(updatedTokenId);
-    const accessToken = await this.authServices.issueAccessToken(id);
-    const refreshToken = await this.authServices.issueRefreshToken(id);
-    return { accessToken, refreshToken };
+    const { tokenId, userEntity } = req.user;
+    await this.authServices.deleteRefreshToken(tokenId);
+    return await this.authServices.issueTokensPair(userEntity);
   }
 }

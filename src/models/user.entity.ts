@@ -1,6 +1,5 @@
-import { BelongsToMany, Column, Model, Table } from "sequelize-typescript";
+import { Column, HasMany, Model, Table } from "sequelize-typescript";
 import { IncomeEntity } from "./income.entity";
-import { IncomeUserEntity } from "./many-to-many/income-user.entity";
 
 @Table
 export class UserEntity extends Model {
@@ -22,6 +21,6 @@ export class UserEntity extends Model {
   @Column
   pin: string;
 
-  @BelongsToMany(() => IncomeEntity, () => IncomeUserEntity)
+  @HasMany(() => IncomeEntity)
   incomes: IncomeEntity[];
 }

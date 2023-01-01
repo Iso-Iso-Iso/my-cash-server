@@ -1,7 +1,12 @@
-import { BelongsToMany, Column, Model, Table } from "sequelize-typescript";
+import {
+  BelongsTo,
+  Column,
+  ForeignKey,
+  Model,
+  Table,
+} from "sequelize-typescript";
 import { IncomeType } from "../constants/income.const";
 import { UserEntity } from "./user.entity";
-import { IncomeUserEntity } from "./many-to-many/income-user.entity";
 
 @Table
 export class IncomeEntity extends Model {
@@ -9,11 +14,18 @@ export class IncomeEntity extends Model {
   id: number;
 
   @Column
+  name: string;
+
+  @Column
   type: IncomeType;
 
   @Column
   amount: number;
 
-  @BelongsToMany(() => UserEntity, () => IncomeUserEntity)
-  users: UserEntity[];
+  @ForeignKey(() => UserEntity)
+  @Column
+  userId: number;
+
+  @BelongsTo(() => UserEntity)
+  user: UserEntity;
 }

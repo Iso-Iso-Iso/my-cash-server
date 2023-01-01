@@ -31,9 +31,15 @@ export class AuthService {
     return await this.userEntity.findOne({ where: { email } });
   }
 
-  async issueAccessToken(userId: number) {
+  async issueTokensPair(user: UserEntity) {
+    const accessToken = await this.issueAccessToken(user.id, user.email);
+    const refreshToken = await this.issueRefreshToken(user.id);
+    return { accessToken, refreshToken };
+  }
+
+  async issueAccessToken(userId: number, email: string) {
     return await this.jwtService.signAsync(
-      { userId },
+      { userId, email },
       {
         expiresIn: "5m",
         secret: process.env.JWT_SECRET,
@@ -57,7 +63,10 @@ export class AuthService {
   }
 
   async findRefreshTokenByUuid(uuid) {
-    return await this.jwtEntity.findOne({ where: { uuid } });
+    return await this.jwtEntity.findOne({
+      where: { uuid },
+      include: [UserEntity],
+    });
   }
 
   async deleteRefreshToken(id) {

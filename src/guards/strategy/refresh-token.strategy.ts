@@ -21,14 +21,18 @@ export class RefreshTokenStrategy extends PassportStrategy(
   }
 
   async validate(payload: any) {
-    console.log(payload);
     const { uuid } = payload;
     const token = await this.authServices.findRefreshTokenByUuid(uuid);
 
     if (!token) {
       throw new UnauthorizedException("User session was expired");
     }
+    const { user, id } = token;
 
-    return { tokenUuid: token, id: token.userId };
+    return {
+      tokenUuid: uuid,
+      tokenId: id,
+      userEntity: user,
+    };
   }
 }

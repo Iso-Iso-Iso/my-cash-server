@@ -2,7 +2,6 @@ import { Sequelize } from "sequelize-typescript";
 import { UserEntity } from "../models/user.entity";
 import { JwtEntity } from "../models/jwt.entity";
 import { IncomeEntity } from "../models/income.entity";
-import { IncomeUserEntity } from "../models/many-to-many/income-user.entity";
 
 export const databaseProvider = [
   {
@@ -17,12 +16,7 @@ export const databaseProvider = [
         password: process.env.PASSWORD || "",
         database: process.env.DATABASE || "cp_money",
       });
-      sequelize.addModels([
-        UserEntity,
-        JwtEntity,
-        IncomeEntity,
-        IncomeUserEntity,
-      ]);
+      sequelize.addModels([UserEntity, JwtEntity, IncomeEntity]);
       await sequelize.sync();
       return sequelize;
     },
