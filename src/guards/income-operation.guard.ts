@@ -6,7 +6,7 @@ import {
   Inject,
   BadRequestException,
 } from "@nestjs/common";
-import { IncomeService } from "../income/income.service";
+import { IncomeService } from "../features/income/income.service";
 
 @Injectable()
 export class IncomeOperationGuard implements CanActivate {

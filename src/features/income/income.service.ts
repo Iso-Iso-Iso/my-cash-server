@@ -1,10 +1,10 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { IncomeEntity } from "../models/income.entity";
-import { ENTITY_PROVIDERS } from "../constants/entity.const";
+import { Injectable } from "@nestjs/common";
+import { IncomeEntity } from "../../models/income.entity";
+import { InjectModel } from "@nestjs/sequelize";
 
 @Injectable()
 export class IncomeService {
-  @Inject(ENTITY_PROVIDERS.INCOME)
+  @InjectModel(IncomeEntity)
   private readonly incomeEntity: typeof IncomeEntity;
 
   async getIncomeByUserId(userId) {

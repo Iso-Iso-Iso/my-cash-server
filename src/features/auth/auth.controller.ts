@@ -9,11 +9,11 @@ import {
   UsePipes,
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
-import { CreateUserDto, LoginUserDto } from "../dto/user.dto";
-import { ValidateDtoPipe } from "../pipes/validate-dto.pipe";
-import { HashPasswordPipe } from "../pipes/hash-password.pipe";
-import { UserAccessibilityGuard } from "../guards/user-accessibility.guard";
-import { RefreshTokenGuard } from "../guards/refresh-token.guard";
+import { CreateUserDto, LoginUserDto } from "../../dto/user.dto";
+import { ValidateDtoPipe } from "../../pipes/validate-dto.pipe";
+import { HashPasswordPipe } from "../../pipes/hash-password.pipe";
+import { UserAccessibilityGuard } from "../../guards/user-accessibility.guard";
+import { RefreshTokenGuard } from "../../guards/refresh-token.guard";
 
 @Controller("/api/auth")
 export class AuthController {

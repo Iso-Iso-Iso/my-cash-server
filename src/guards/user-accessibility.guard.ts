@@ -5,7 +5,7 @@ import {
   Inject,
   Injectable,
 } from "@nestjs/common";
-import { AuthService } from "../auth/auth.service";
+import { AuthService } from "../features/auth/auth.service";
 import { Request } from "express";
 
 @Injectable()

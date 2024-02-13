@@ -1,19 +1,19 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { UserEntity } from "../models/user.entity";
-import { ENTITY_PROVIDERS } from "../constants/entity.const";
-import { JwtEntity } from "../models/jwt.entity";
+import { UserEntity } from "../../models/user.entity";
+import { JwtEntity } from "../../models/jwt.entity";
 import { v4 } from "uuid";
+import { InjectModel } from "@nestjs/sequelize";
 
 @Injectable()
 export class AuthService {
   @Inject()
   private readonly jwtService: JwtService;
 
-  @Inject(ENTITY_PROVIDERS.USER)
+  @InjectModel(UserEntity)
   private readonly userEntity: typeof UserEntity;
 
-  @Inject(ENTITY_PROVIDERS.JWT)
+  @InjectModel(JwtEntity)
   private readonly jwtEntity: typeof JwtEntity;
 
   async checkEmailAccessibility(userEmail: string) {

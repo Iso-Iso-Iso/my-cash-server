@@ -1,10 +1,8 @@
 import { Module } from "@nestjs/common";
-
-import { databaseProvider } from "./database/database.provider";
 import { ConfigModule } from "@nestjs/config";
-import { AuthModule } from "./auth/auth.module";
+import { AuthModule } from "./features/auth/auth.module";
 import { DatabaseModule } from "./database/database.module";
-import { IncomeModule } from "./income/income.module";
+import { IncomeModule } from "./features/income/income.module";
 
 @Module({
   imports: [
@@ -19,6 +17,6 @@ import { IncomeModule } from "./income/income.module";
     IncomeModule,
   ],
   controllers: [],
-  providers: [...databaseProvider],
+  providers: [],
 })
 export class AppModule {}

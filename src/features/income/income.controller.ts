@@ -12,11 +12,11 @@ import {
   UseGuards,
   UsePipes,
 } from "@nestjs/common";
-import { AccessTokenGuard } from "../guards/access-token.guard";
+import { AccessTokenGuard } from "../../guards/access-token.guard";
 import { IncomeService } from "./income.service";
-import { ValidateDtoPipe } from "../pipes/validate-dto.pipe";
-import { CreateIncomeDto } from "../dto/income.dto";
-import { IncomeOperationGuard } from "../guards/income-operation.guard";
+import { ValidateDtoPipe } from "../../pipes/validate-dto.pipe";
+import { CreateIncomeDto } from "../../dto/income.dto";
+import { IncomeOperationGuard } from "../../guards/income-operation.guard";
 
 @Controller("/api/income")
 export class IncomeController {
