@@ -9,7 +9,7 @@ import { IncomeModule } from "./features/income/income.module";
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env${
-        process.env.NODE_ENV == "production" ? ".develop" : ""
+        process.env.NODE_ENV == "development" ? ".develop" : ""
       }`,
     }),
     DatabaseModule,

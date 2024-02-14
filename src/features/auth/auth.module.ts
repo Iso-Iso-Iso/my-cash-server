@@ -5,7 +5,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { UserEntity } from "../../models/user.entity";
 import { JwtEntity } from "../../models/jwt.entity";
 import { PassportModule } from "@nestjs/passport";
-import { RefreshTokenStrategy } from "../../guards/strategy/refresh-token.strategy";
+import { RefreshTokenStrategy } from "../../strategy/refresh-token.strategy";
 import { SequelizeModule } from "@nestjs/sequelize";
 
 @Module({
